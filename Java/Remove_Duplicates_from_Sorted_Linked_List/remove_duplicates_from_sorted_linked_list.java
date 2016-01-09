@@ -33,21 +33,13 @@ public class Solution {
     }
 
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) {
-            return null;
-        } else if (head.next == null) {
-            return head;
-        }
-
-        while (head.val == head.next.val) {
-            if (head.next.next != null) {
-                head.next = head.next.next;
-            } else {
-                head.next = null;
-                return head;
-            }
-        }
-        deleteDuplicates(head.next);
-        return head;
+	    ListNode node = head;
+	    ListNode temp = node;
+	    while(node!=null){
+		    while(temp!=null&&node.val==temp.val) temp=temp.next;
+		    node.next = temp;
+		    node = temp;
+	    }
+	    return head;
     }
 }

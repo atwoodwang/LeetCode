@@ -25,6 +25,32 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+
+public class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int sum){
+	    List<List<Integer>> result = new LinkedList<List<Integer>>();
+	    if(root==null) return result;
+	    List<Integer> list = new LinkedList<>();
+	    cal(result,root,sum,list);
+	    return result;
+    }
+
+    public void cal(List<List<Integer>> result,TreeNode root,int sum,List<Integer> list){
+		if(root==null) return;
+	    list.add(root.val);
+	    if(root.left==null&&root.right==null&&root.val==sum){
+		    result.add(new LinkedList(list));
+		    list.remove(list.size()-1);
+		    return;
+	    }
+	    cal(result,root.left,sum-root.val,list); 
+	    cal(result,root.right,sum-root.val,list);
+	    list.remove(list.size()-1);
+    }
+}
+
+
 public class Solution {
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<List<Integer>> sumList = new ArrayList<List<Integer>>();
