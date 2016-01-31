@@ -17,22 +17,20 @@
 //  []
 //]
 
-
+//Bit-Manipulation
 public class Solution {
     public List<List<Integer>> subsets(int[] nums) {
 	    Arrays.sort(nums);
-        List<List<Integer>> result = new ArrayList<>();
-        int n = 1<<nums.length;
-        for(int i=0;i<n;i++){
-	        List<Integer> list = new ArrayList<>();
-	        for(int j=0;j<nums.length;j++){
-		        if((i & (1<<j))!=0){
-			        list.add(nums[j]);
-		        }
-	        }
-	        result.add(list);
-        }
-        return result; 
+		List<List<Integer>> res = new ArrayList<>();
+	    int n = 1<<nums.length;
+	    for(int i=0;i<n;i++){
+			List<Integer> list = new ArrayList<>();
+		    for(int j=0;j<nums.length;j++){
+			    if(((i>>j)&1)==1) list.add(nums[j]);
+		    }
+		    res.add(list);
+	    }
+	    return res;
     }
 }
 
@@ -76,3 +74,20 @@ element 3 is inserted only into those places where 3rd bit of j is 1
 Time complexity : O(n*2^n) , for every input element loop traverses the whole solution set length i.e. 2^n
 
 
+//Iteration
+public class Solution{
+	public List<List<Integer>> subsets(int[] S) {
+        List<List<Integer>> res = new ArrayList<>();
+        res.add(new ArrayList<Integer>());
+        Arrays.sort(S);
+        for(int i : S) {
+            int size = res.size();
+            for(int n=0;n<size;n++) {
+                List<Integer> a = new ArrayList<>(res.get(n));
+                a.add(i);
+                res.add(a);
+            }
+        }
+        return res;
+    }
+}

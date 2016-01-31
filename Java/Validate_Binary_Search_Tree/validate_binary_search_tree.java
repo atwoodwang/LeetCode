@@ -31,6 +31,8 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+//Recursive
 public class Solution {
     public boolean isValidBST(TreeNode root) {
     	return isValid(root,Long.MIN_VALUE,Long.MAX_VALUE);
@@ -40,5 +42,26 @@ public class Solution {
 		if(root==null){return true;}
 		if(root.val<=min||root.val>=max){return false;}
 	  	return isValid(root.left,min,root.val)&&isValid(root.right,root.val,max);
+    }
+}
+
+//Iterative
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+		if(root==null||(root.left==null&&root.right==null)) return true;
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode node = root;
+		long pre = Long.MIN_VALUE;
+		while(!stack.isEmpty()||node!=null){
+			while(node!=null){
+				stack.push(node);
+				node=node.left;
+			}
+			node = stack.pop();
+			if(node.val<=pre) return false;
+			pre=node.val;
+			node = node.right;
+		}
+		return true;
     }
 }
