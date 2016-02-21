@@ -40,7 +40,7 @@ public class Solution {
 	        int i = queue.poll();// course i has no prereq which can be taken immediately.
 	        res[count++]=i;
 	        List<Integer> list = graph[i];//get a list of courses that requires i as prereq.
-	        if(list==null) continue;
+	        if(list==null) continue;//means this course is not any class's prereq
 	        for(int n:list){
 		        indegree[n]--;//remove that edge cause i is taken.
 		        if(indegree[n]==0) queue.offer(n);
